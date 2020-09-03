@@ -10,11 +10,9 @@ type AccordionPropsType = {
     collapsed: boolean
     onChange: () => void
     items: ItemType[]
-    onClick: (value:any)=> void
+    OnClick: (value: any) => void
 }
 
-
-const Accordion = React.memo(AccordionSecret)
 
 export function AccordionSecret(props: AccordionPropsType) {
     console.log("UncontrolledAccordion rendered")
@@ -22,7 +20,7 @@ export function AccordionSecret(props: AccordionPropsType) {
         <AccordionTitle title={props.titleValue}
                         onChange={props.onChange}
         />
-        { !props.collapsed && <AccordionBody items={props.items} onClick={ props.onClick }/> }
+        { !props.collapsed && <AccordionBody items={props.items}  OnClick={props.OnClick}/> }
     </div>
 }
 
@@ -34,21 +32,21 @@ type AccordionTitlePropsType = {
 function AccordionTitle(props: AccordionTitlePropsType) {
     console.log("AccordionTitle rendering")
     return (
-        <h3 onClick={(e) => props.onChange()}>{props.title}</h3>
+        <h3 onClick={(e) => props.onChange()}> -- {props.title}</h3>
     )
 }
 
 type AccordionBodyPropsType = {
     items: ItemType[]
-    onClick: (value:any)=> void
+    OnClick: (value: any) => void
 }
 
-function AccordionBody(props:AccordionBodyPropsType) {
+function AccordionBody(props: AccordionBodyPropsType) {
     console.log("AccordionBody rendering")
     return (
         <div>
             <ul>
-                { props.items.map( (i, index) => <li onClick={ ()=> {props.onClick(i.value)} } key={index}>{i.title}</li> ) }
+                {props.items.map((i, index) => <li onClick={() => {props.OnClick(i.value)}} key={index}>{i.title}</li>)}
             </ul>
         </div>
     )
