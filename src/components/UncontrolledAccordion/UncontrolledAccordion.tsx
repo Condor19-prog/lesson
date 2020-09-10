@@ -5,8 +5,6 @@ type AccordionPropsType = {
     titleValue: string
 }
 
-
-
 function UncontrolledAccordion(props: AccordionPropsType) {
     console.log("UncontrolledAccordion rendered")
 
