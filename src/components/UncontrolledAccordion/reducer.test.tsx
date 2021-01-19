@@ -27,6 +27,6 @@ test("collapsed should be ", () => {
         collapsed: false
     }
     expect( () => {
-        reducer(state, {typ: '1'} )
+        reducer(state, {type: '1'} )
     } ).toThrowError();
 })
