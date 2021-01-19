@@ -1,35 +1,32 @@
-import {reducer, StateType, TOGGLE_COLLAPSED} from "./reducer";
+// @ts-ignore
+import {reducer, stateType, TOGGLE_COLLAPSED} from "./reducer";
 
 test("collapsed should be true", () => {
 
 //data
-    const state: StateType = {
+    const state: stateType = {
         collapsed: false
     }
 //action
-    const newState = reducer(state, {type: TOGGLE_COLLAPSED})
+    const newState = reducer(state, {type: 'TOGGLE-COLLAPSED'})
 //expection
     expect(newState.collapsed).toBe(true);
 })
 
 test("collapsed should be false", () => {
-
-
-    const state: StateType = {
+    const state: stateType = {
         collapsed: true
     }
 
-    const newState = reducer(state, {type: TOGGLE_COLLAPSED})
-    expect(newState.collapsed).toBe(false);
+    const newState = reducer(state, {type: 'TOGGLE-COLLAPSED'})
+    expect(newState.collapsed).toBe(false)
 })
 
-
-test("collapsed should be false", () => {
-    const state: StateType = {
-        collapsed: true
+test("collapsed should be ", () => {
+    const state: stateType = {
+        collapsed: false
     }
-
-    expect( ()=>{
-        reducer(state, {type: 'FAKE_TYPE'} )
+    expect( () => {
+        reducer(state, {typ: '1'} )
     } ).toThrowError();
 })

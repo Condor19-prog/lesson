@@ -1,21 +1,15 @@
-export type ActionType = {
+// @ts-ignore
+type actionType = {
     type: string
 }
-
-export const TOGGLE_COLLAPSED = "TOGGLE-COLLAPSED"
-
-export type StateType = {
+type collapsedType = {
     collapsed: boolean
 }
-
-export const reducer = (state: StateType, action: ActionType): StateType => {
+export const reducer = (state: collapsedType, action: actionType): collapsedType => {
     switch (action.type) {
-        case TOGGLE_COLLAPSED:
-            return  {
-                ...state,
-                collapsed: !state.collapsed
-            }
-        default:
-            throw new Error("Bad ActionType");
+        case 'VARIABLE-VALUE': {
+            return {...state, collapsed: !state.collapsed}
+        }
     }
+    return state
 }
