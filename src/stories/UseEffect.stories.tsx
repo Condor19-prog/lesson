@@ -32,20 +32,20 @@ export const Example1 = () => {
     )
 }
 
-export const SetTimeoutExample = () => {
+export const SetIntervalExample = () => {
     console.log('SetTimeoutExample')
     const [counter, setCounter] = useState(0)
-    const [fake, setFake] = useState(0)
 
     useEffect(() => {
-        setInterval(() => {
+        const IntervalId = setInterval(() => {
             setCounter(counter => counter + 1)
         }, 1000)
+        return () => clearInterval(IntervalId)
     }, [])
 
     return (
         <>
-            Hello, counter: {counter} fake: {fake}
+            Hello, counter: {counter}
             {/*<button onClick={() => setCounter(counter + 1)}>counter</button>*/}
             {/*<button onClick={() => setFake(fake + 1)}>fake</button>*/}
         </>
@@ -65,6 +65,69 @@ export const Clock = () => {
     return (
         <>
             {data.toLocaleTimeString()}
+        </>
+    )
+}
+
+export const ResetEffectExample = () => {
+    const [counter, setCounter] = useState(1)
+    console.log('Component rendered with' + counter)
+
+    useEffect(() => {
+        console.log('EffectOccurred ' + counter)
+        return () => {
+            console.log('reset' + counter)
+        }
+    }, [counter])
+    return (
+        <>
+            Hello, counter: {counter}
+            <button onClick={() => setCounter(counter + 1)}>+</button>
+        </>
+    )
+}
+
+export const KeysTrackerExample = () => {
+    const [text, setText] = useState('')
+    console.log('Component rendered with ' + text)
+
+    useEffect(() => {
+
+        const handler = (e: KeyboardEvent) => {
+            console.log(e.key)
+            setText(text + e.key)
+        }
+
+        window.addEventListener('keypress', handler)
+        return () => {
+            window.removeEventListener('keypress', handler)
+        }
+
+    }, [text])
+
+    return (
+        <>
+            Hello, text: {text}
+        </>
+    )
+}
+export const SetTimeoutExample = () => {
+    const [text, setText] = useState('')
+    console.log('Component rendered with ' + text)
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            console.log('timeout expired')
+            setText('3 seconds passed')
+        }, 3000)
+        return () => {
+            clearTimeout(timeoutId)
+        }
+    }, [text])
+
+    return (
+        <>
+            Hello, text: {text}
         </>
     )
 }
